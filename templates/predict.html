@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse AI — Next Word Prediction</title>
+    <meta name="description" content="A learning-based LSTM & GRU next-word prediction model. Built to explore how recurrent neural networks understand and predict language.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/" class="nav-brand">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>SYNAPSE AI</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#demo">Interactive Demo</a></li>
+                <li><a href="#stats">Performance</a></li>
+                <li><a href="https://github.com/atulshahi6310/Next-Word-Prediction.git" target="_blank">API Docs</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+            <a href="https://github.com/atulshahi6310/Next-Word-Prediction.git" target="_blank" class="github-link" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="#demo" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <h1 class="hero-title">
+            <span class="gradient-text">Predict the Future</span><br>
+            of Every Sentence.
+        </h1>
+        <p class="hero-subtitle">
+            A learning-based project exploring LSTM & GRU architectures.
+            Built to understand how recurrent neural networks predict the next word in a sequence.
+        </p>
+        <div class="hero-buttons">
+            <a href="#demo" class="btn-primary">
+                Try Interactive Demo
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://github.com/atulshahi6310/Next-Word-Prediction.git" target="_blank" class="btn-outline">
+                View GitHub
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+        </div>
+
+        <!-- Learning Notice -->
+        <div class="notice-banner">
+            <svg class="notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p class="notice-text">
+                <strong>Learning Project Notice:</strong> This project is built purely for educational purposes to understand how LSTM and GRU networks work for next-word prediction. Accuracy is limited due to a small training dataset and constrained compute resources. It is not meant for production use.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== VERSION BADGE ===== -->
+    <div class="version-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">LSTM Model  ·  v1.0  ·  Learning</span>
+    </div>
+
+    <!-- ===== INTERACTIVE DEMO ===== -->
+    <section class="demo-section" id="demo">
+        <h2 class="demo-title">Experience the Accuracy</h2>
+        <p class="demo-subtitle">Type a sentence below and see how the LSTM model anticipates your next thought in real-time.</p>
+
+        <form action="/predict" method="post">
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <div class="demo-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="demo-card-label">synapse_demo_v1.0</span>
+                </div>
+
+                <div class="demo-card-body">
+                    <textarea
+                        class="demo-input-area"
+                        name="text"
+                        id="text"
+                        placeholder="Artificial intelligence is the key to..."
+                        required
+                    >{{ request.form.get('text', '') }}</textarea>
+
+                    {% if next_word %}
+                    <div class="result-tags">
+                        <span class="result-tag primary">{{ next_word }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="demo-card-footer">
+                    <button type="button" class="demo-clear" onclick="document.getElementById('text').value='';">Clear</button>
+                    <button type="submit" class="demo-submit">
+                        Predict Next Word
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats-section" id="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="stat-value">~50ms</div>
+                <div class="stat-label">Inference Latency</div>
+                <p class="stat-desc">Near-instant response time for real-time writing assistance across any device.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="stat-value">Learning</div>
+                <div class="stat-label">Model Accuracy</div>
+                <p class="stat-desc">Accuracy is limited due to a small dataset and constrained compute. Built for learning, not production.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div class="stat-value">~1.3M</div>
+                <div class="stat-label">Parameters Trained</div>
+                <p class="stat-desc">Efficiently trained LSTM model exploring how recurrent networks understand language patterns.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <h2 class="cta-title">Want to explore the code?</h2>
+            <p class="cta-subtitle">
+                Dive into the source code on GitHub. Learn how LSTM and GRU architectures are implemented for next-word prediction from scratch.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://github.com/atulshahi6310/Next-Word-Prediction.git" target="_blank" class="btn-primary">
+                    View on GitHub
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                </a>
+                <a href="#demo" class="btn-outline">Try the Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            SYNAPSE
+        </div>
+        <ul class="footer-links">
+            <li><a href="https://github.com/atulshahi6310/Next-Word-Prediction.git" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://github.com/atulshahi6310/Next-Word-Prediction.git" target="_blank">Terms of Service</a></li>
+            <li><a href="https://github.com/atulshahi6310/Next-Word-Prediction.git" target="_blank">Security</a></li>
+        </ul>
+        <p class="footer-copy">© 2026 Synapse AI Technologies. All rights reserved.</p>
+    </footer>
+
+    <!-- ===== THEME TOGGLE SCRIPT ===== -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+
+        // Load saved theme
+        (function () {
+            const saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+</body>
+</html>
