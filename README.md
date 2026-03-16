@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/LSTM-NLP-blueviolet?style=for-the-badge" alt="LSTM"/>
 </p>
 
-<h1 align="center">⚡ Synapse AI — Next Word Prediction</h1>
+<h1 align="center">⚡Synapse AI — Next Word Prediction</h1>
 
 <p align="center">
   <em>An LSTM-based deep learning model that predicts the next word in a sentence, trained on Shakespeare's <strong>Hamlet</strong> and served via a beautiful Flask web application.</em>
