@@ -21,7 +21,7 @@ def predict_next_word(model,tokenizer,text,max_seq_len):
         token_list = token_list[-(max_seq_len -1):] # ensure this seq lenth is match max_seq
     token_list = pad_sequences([token_list],maxlen=max_seq_len-1,padding='pre')
     predicted = model.predict(token_list)
-    predict_word_index = np.argmax(predicted,axis=1)
+    predict_word_index = np.argmax(predicted,axis=1)[0]
     for word,index in tokenizer.word_index.items():
         if index == predict_word_index:
             return word
@@ -35,7 +35,7 @@ def predict():
     if request.method == 'POST':
         text = request.form['text']
         max_seq_len = 20
-        next_word = predict_next_word(model,tokenizer,text,max_seq_len)
+        next_word = f"{text}{predict_next_word(model,tokenizer,text,max_seq_len)}"
         return render_template('predict.html',next_word=next_word)
     return render_template('predict.html',next_word='')  
 
